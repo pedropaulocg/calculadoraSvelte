@@ -1,53 +1,45 @@
 <script>
+  import CalculadoraModel from '../model/CalculadoraModel'
   import Botao from "./Botao.svelte";
   import Linha from "./Linha.svelte";
   import Display from "./Display.svelte"
   
-  class Model {
-    constructor(valor = '0') {
-      this.valor = valor
-    }
-  }
-  let obj = new Model()
-  
-
-  function numeroDigitado(numero) {
-    obj.valor += numero
-  }
-  
+  let calc = new CalculadoraModel()
+  const operacaoDigitada = (op) => calc = calc.opDigitada(op)
+  const calcular = () => calc = calc.calcular()
 
 </script>
 
 <div class="calculadora">
-  <Display valor={obj.valor}/>
+  <Display valor={calc.valor}/>
   <Linha>
-    <Botao triplo destaque btnTxt={"AC"} />
+    <Botao triplo destaque btnTxt={"AC"} onClick ={() => calc = calc.limpar()}/>
     <Botao operacao btnTxt={"/"} />
   </Linha>
 
   <Linha>
-    <Botao btnTxt={"7"} onClick={numeroDigitado}/>
-    <Botao btnTxt={"8"} onClick={numeroDigitado}/>
-    <Botao btnTxt={"9"} onClick={numeroDigitado}/>
-    <Botao operacao btnTxt={"*"} />
+    <Botao btnTxt={"7"} onClick={num => calc = calc.numeroDigitado(num)}/>
+    <Botao btnTxt={"8"} onClick={num => calc = calc.numeroDigitado(num)}/>
+    <Botao btnTxt={"9"} onClick={num => calc = calc.numeroDigitado(num)}/>
+    <Botao operacao btnTxt={"*"} onClick={operacaoDigitada} />
   </Linha>
 
   <Linha>
-    <Botao btnTxt={"4"} onClick={numeroDigitado}/>
-    <Botao btnTxt={"5"} onClick={numeroDigitado}/>
-    <Botao btnTxt={"6"} onClick={numeroDigitado}/>
-    <Botao operacao btnTxt={"+"} />
+    <Botao btnTxt={"4"} onClick={num => calc = calc.numeroDigitado(num)}/>
+    <Botao btnTxt={"5"} onClick={num => calc = calc.numeroDigitado(num)} />
+    <Botao btnTxt={"6"} onClick={num => calc = calc.numeroDigitado(num)}/>
+    <Botao operacao btnTxt={"+"} onClick={operacaoDigitada}/>
   </Linha>
   <Linha>     
-		<Botao btnTxt={'1'} onClick={numeroDigitado}/>
-		<Botao btnTxt={'2'} onClick={numeroDigitado}/>
-		<Botao btnTxt={'3'} onClick={numeroDigitado}/>
-		<Botao operacao btnTxt={'-'}/>  
+		<Botao btnTxt={'1'} onClick={num => calc = calc.numeroDigitado(num)}/>
+		<Botao btnTxt={'2'} onClick={num => calc = calc.numeroDigitado(num)}/>
+		<Botao btnTxt={'3'} onClick={num => calc = calc.numeroDigitado(num)}/>
+		<Botao operacao btnTxt={'-'} onClick={operacaoDigitada}/>  
   </Linha>
   <Linha>     
-		<Botao duplo btnTxt={'0'} onClick={numeroDigitado}/>
-		<Botao btnTxt={','} onClick={numeroDigitado}/>
-		<Botao destaque btnTxt={'='}/>
+		<Botao duplo btnTxt={'0'} onClick={num => calc = calc.numeroDigitado(num)}/>
+		<Botao btnTxt={','} onClick = {()=> calc = calc.pontoDigitado()} />
+		<Botao destaque btnTxt={'='} onClick={calcular}/>
   </Linha>
 </div>
 

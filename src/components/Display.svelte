@@ -1,10 +1,10 @@
 <script>
     export let valor
 
-    $: tamanhoFont = valor.length > 20 ? 'pequena' : `s-${valor.length}`
+    $: tamanhoFonte = valor.length > 20 ? 'pequena' : `s-${valor.length}`
 </script>
 
-<div class={`tela ${tamanhoFont}`}>
+<div class={`tela ${tamanhoFonte}`}>
     <span>
         {valor}
     </span>
